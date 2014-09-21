@@ -32,10 +32,16 @@ for i in range(THREADCOUNT):
 
 
 def main():
-    try:
-        Accounts = Read('Accounts.txt')
-    except IOError:
+    if len(sys.argv) < 2:
+        try:
+            Accounts = Read('Accounts.txt')
+        except IOError:
+            print('Please use the system args or make a file called Accounts.txt')
+            raw_input()
+            sys.exit()
+    else:
         Accounts = Read(sys.argv[1])
+        
 
     for Account in Accounts:
         queue.put(Account)
